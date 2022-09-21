@@ -87,6 +87,10 @@ video {
   font: inherit;
   vertical-align: baseline;
 }
+html,
+body {
+  font-family: sans-serif;
+}
 /* HTML5 display-role reset for older browsers */
 article,
 aside,

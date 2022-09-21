@@ -32,8 +32,8 @@
     --secondary-typography: #aaaaaa;
     --secondary-border: #444444;
 
-    --gradient-overlay-start: #00000000;
-    --gradient-overlay-end: #00000066;
+    --gradient-overlay-start: #27273066;
+    --gradient-overlay-end: #272730cc;
 
     &.theme-light {
       --main-background: #f7f7f7;
@@ -43,8 +43,8 @@
       --secondary-typography: #444444;
       --secondary-border: #aaaaaa;
 
-      --gradient-overlay-start: #f7f7f700;
-      --gradient-overlay-end: #f7f7f766;
+      --gradient-overlay-start: #f7f7f766;
+      --gradient-overlay-end: #f7f7f7cc;
     }
   }
 }
