@@ -103,7 +103,7 @@ const backgroundLayers: { args: Partial<BackgroundCanvasArgs>; uid: string }[] =
     args: {
       numTicks: 0,
       numArcs: 24,
-      arcRadius: 680,
+      arcRadius: 580,
       arcColor: '#AAAAAA',
     },
   },
@@ -134,8 +134,8 @@ const animDelay = 100;
 
 function Background() {
   const { isDarkMode } = useContext(AppContext);
-  const minColor = isDarkMode ? '#272730' : '#999999';
-  const maxColor = isDarkMode ? '#999999' : '#272730';
+  const minColor = isDarkMode ? '#272730' : '#f7f7f7';
+  const maxColor = isDarkMode ? '#f7f7f7' : '#272730';
   return (
     <div className="background-container">
       <div className="layer-container">
