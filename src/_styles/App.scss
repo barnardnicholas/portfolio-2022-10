@@ -1,0 +1,55 @@
+@import './reset.scss';
+@import './variables.scss';
+@import './mixins.scss';
+
+@include themeColors(); // Load CSS color variables
+
+.App {
+  text-align: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: var(--main-background);
+  color: var(--main-typography);
+  @include transitionColors();
+}
+
+h1 {
+  // color: f7f7f7;
+  @include titleText();
+  @include h1Title();
+  @include transitionColors();
+}
+h2 {
+  // color: f7f7f7;
+  @include titleText();
+  @include h2Title();
+  @include transitionColors();
+}
+h3 {
+  // color: f7f7f7;
+  @include titleText();
+  @include h3Title();
+  @include transitionColors();
+}
+h4 {
+  // color: f7f7f7;
+  @include titleText();
+  @include h4Title();
+  @include transitionColors();
+}
+
+p,
+i,
+strong,
+a,
+em,
+.fa,
+.fal {
+  color: var(--main-typography);
+  @include transitionColors();
+}
+
+@import './components/background.scss';

@@ -1,0 +1,48 @@
+@keyframes bg-rotate {
+  0% {
+    transform: rotateX(15deg) rotateY(25deg);
+  }
+  25% {
+    transform: rotateX(5deg) rotateY(15deg);
+  }
+  75% {
+    transform: rotateX(20deg) rotateY(30deg);
+  }
+  100% {
+    transform: rotateX(15deg) rotateY(25deg);
+  }
+}
+
+@keyframes bg-layer-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+// Standard Theme
+@mixin themeColors() {
+  .App {
+    --main-background: #272730;
+    --main-background-trans: #272730cc;
+    --main-typography: #f7f7f7;
+    --main-border: #666666;
+    --secondary-typography: #aaaaaa;
+    --secondary-border: #444444;
+
+    &.theme-light {
+      --main-background: #f7f7f7;
+      --main-background-trans: #f7f7f7cc;
+      --main-typography: #272730;
+      --main-border: #666666;
+      --secondary-typography: #444444;
+      --secondary-border: #aaaaaa;
+    }
+  }
+}
+
+@mixin transitionColors() {
+  transition: color 0.5s ease, border-color 0.5s ease, background-color 0.5s ease;
+}
