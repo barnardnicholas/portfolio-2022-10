@@ -28,22 +28,24 @@ function SlideShow() {
   const { activeSlide, setActiveSlide } = useContext(SlideshowContext);
 
   const handleWheel = (e: WheelEvent) => {
-    const { deltaY } = e.nativeEvent; // + = down, - = up
+    const { deltaY } = e; // + = down, - = up
     if (deltaY < 0) setActiveSlide(wrap(activeSlide - 1, 0, slidesLength));
     if (deltaY > 0) setActiveSlide(wrap(activeSlide + 1, 0, slidesLength));
   };
 
   const handleKeyDown = (e: KeyboardEvent) => {
-    console.log(e);
+    const { code } = e.nativeEvent;
+    if (code === 'ArrowUp') setActiveSlide(wrap(activeSlide - 1, 0, slidesLength));
+    if (code === 'ArrowDown') setActiveSlide(wrap(activeSlide + 1, 0, slidesLength));
   };
-
+  /* eslint-disable */
   return (
     <main
       role="button"
       tabIndex={0}
-      className="content-slideshow"
       onWheel={handleWheel}
       onKeyDown={handleKeyDown}
+      className="content-slideshow"
     >
       <Slide index={0} activeSlide={activeSlide}>
         <h1>Page 1</h1>
@@ -81,5 +83,6 @@ function SlideShow() {
     </main>
   );
 }
+/* eslint-enable */
 
 export default SlideShow;
