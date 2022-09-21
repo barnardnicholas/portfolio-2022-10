@@ -6,7 +6,10 @@ export interface AppProps {
 }
 
 /* eslint-disable */
-const initialState: AppProps = { isDarkMode: true, toggleDarkMode: () => {} };
+const initialState: AppProps = {
+  isDarkMode: true,
+  toggleDarkMode: () => {},
+};
 /* eslint-enable */
 
 export const AppContext = createContext<AppProps>(initialState);

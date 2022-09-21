@@ -60,3 +60,28 @@ export function lerpColor(a: string, b: string, amount = 0.5) {
   return `#${(((1 << 24) + (rr << 16) + (rg << 8) + rb) | 0).toString(16).slice(1)}`;
   /* eslint-enable */
 }
+
+/**
+ * Wrap a number around a min/max
+ * @param value
+ * @param from
+ * @param to
+ * @returns Wrapped number
+ */
+export function wrap(value: number, from: number, to: number) {
+  if (typeof from !== 'number' || typeof to !== 'number') {
+    throw new TypeError('Must specify "to" and "from" arguments as numbers');
+  }
+  let intFrom = from;
+  let intTo = to;
+  if (intFrom > intTo) {
+    const t = intFrom;
+    intFrom = intTo;
+    intTo = t;
+  }
+  const cycle = intTo - intFrom;
+  if (cycle === 0) {
+    return intTo;
+  }
+  return value - cycle * Math.floor((value - intFrom) / cycle);
+}
