@@ -1,4 +1,5 @@
 import React from 'react';
+import { lerpColor } from '../../utils/utils';
 import BackgroundCanvas, { BackgroundCanvasArgs } from './BackgroundCanvas';
 import BackgroundLayer from './BackgroundLayer';
 
@@ -116,16 +117,25 @@ const minTranslateZ = -800;
 const maxTranslateZ = 200;
 const zSlice: number = Math.abs(maxTranslateZ - minTranslateZ) / backgroundLayers.length - 1;
 const animDelay = 100;
+const minColor = '#272730';
+const maxColor = '#999999';
 
 function Background() {
   return (
     <div className="background-container">
       <div className="layer-container">
-        {backgroundLayers.map((layer: { args: Partial<BackgroundLayer> }, i: number) => (
-          <BackgroundLayer translateZ={minTranslateZ + i * zSlice} animDelay={i * animDelay}>
-            <BackgroundCanvas args={layer.args} />
-          </BackgroundLayer>
-        ))}
+        {backgroundLayers.map((layer: { args: Partial<BackgroundLayer> }, i: number) => {
+          const color = lerpColor(minColor, maxColor, (1 / backgroundLayers.length) * i);
+          return (
+            <BackgroundLayer translateZ={minTranslateZ + i * zSlice} animDelay={i * animDelay}>
+              <BackgroundCanvas
+                args={
+                  { ...layer.args, tickColor: color, arcColor: color } as Partial<BackgroundLayer>
+                }
+              />
+            </BackgroundLayer>
+          );
+        })}
       </div>
     </div>
   );
