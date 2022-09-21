@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import { v4 as uuid } from 'uuid';
 import { lerpColor } from '../../utils/utils';
 import { AppContext } from '../context/AppContext';
 import BackgroundCanvas, { BackgroundCanvasArgs } from './BackgroundCanvas';
@@ -13,8 +14,9 @@ interface BackgroundLayer {
   tickColor: string;
 }
 
-const backgroundLayers: { args: Partial<BackgroundCanvasArgs> }[] = [
+const backgroundLayers: { args: Partial<BackgroundCanvasArgs>; uid: string }[] = [
   {
+    uid: uuid(),
     args: {
       numTicks: 1,
       numArcs: 0,
@@ -24,6 +26,7 @@ const backgroundLayers: { args: Partial<BackgroundCanvasArgs> }[] = [
     },
   },
   {
+    uid: uuid(),
     args: {
       numTicks: 0,
       numArcs: 3,
@@ -32,6 +35,7 @@ const backgroundLayers: { args: Partial<BackgroundCanvasArgs> }[] = [
     },
   },
   {
+    uid: uuid(),
     args: {
       numTicks: 3,
       numArcs: 0,
@@ -41,6 +45,7 @@ const backgroundLayers: { args: Partial<BackgroundCanvasArgs> }[] = [
     },
   },
   {
+    uid: uuid(),
     args: {
       numTicks: 0,
       numArcs: 3,
@@ -49,6 +54,7 @@ const backgroundLayers: { args: Partial<BackgroundCanvasArgs> }[] = [
     },
   },
   {
+    uid: uuid(),
     args: {
       numTicks: 6,
       numArcs: 0,
@@ -57,6 +63,7 @@ const backgroundLayers: { args: Partial<BackgroundCanvasArgs> }[] = [
     },
   },
   {
+    uid: uuid(),
     args: {
       numTicks: 0,
       numArcs: 6,
@@ -65,6 +72,7 @@ const backgroundLayers: { args: Partial<BackgroundCanvasArgs> }[] = [
     },
   },
   {
+    uid: uuid(),
     args: {
       numTicks: 12,
       numArcs: 0,
@@ -73,6 +81,7 @@ const backgroundLayers: { args: Partial<BackgroundCanvasArgs> }[] = [
     },
   },
   {
+    uid: uuid(),
     args: {
       numTicks: 0,
       numArcs: 12,
@@ -81,6 +90,7 @@ const backgroundLayers: { args: Partial<BackgroundCanvasArgs> }[] = [
     },
   },
   {
+    uid: uuid(),
     args: {
       numTicks: 24,
       numArcs: 0,
@@ -89,6 +99,7 @@ const backgroundLayers: { args: Partial<BackgroundCanvasArgs> }[] = [
     },
   },
   {
+    uid: uuid(),
     args: {
       numTicks: 0,
       numArcs: 24,
@@ -97,6 +108,7 @@ const backgroundLayers: { args: Partial<BackgroundCanvasArgs> }[] = [
     },
   },
   {
+    uid: uuid(),
     args: {
       numTicks: 40,
       numArcs: 0,
@@ -105,6 +117,7 @@ const backgroundLayers: { args: Partial<BackgroundCanvasArgs> }[] = [
     },
   },
   {
+    uid: uuid(),
     args: {
       numTicks: 0,
       numArcs: 30,
@@ -126,18 +139,24 @@ function Background() {
   return (
     <div className="background-container">
       <div className="layer-container">
-        {backgroundLayers.map((layer: { args: Partial<BackgroundLayer> }, i: number) => {
-          const color = lerpColor(minColor, maxColor, (1 / backgroundLayers.length) * i);
-          return (
-            <BackgroundLayer translateZ={minTranslateZ + i * zSlice} animDelay={i * animDelay}>
-              <BackgroundCanvas
-                args={
-                  { ...layer.args, tickColor: color, arcColor: color } as Partial<BackgroundLayer>
-                }
-              />
-            </BackgroundLayer>
-          );
-        })}
+        {backgroundLayers.map(
+          (layer: { args: Partial<BackgroundLayer>; uid: string }, i: number) => {
+            const color = lerpColor(minColor, maxColor, (1 / backgroundLayers.length) * i);
+            return (
+              <BackgroundLayer
+                key={layer.uid}
+                translateZ={minTranslateZ + i * zSlice}
+                animDelay={i * animDelay}
+              >
+                <BackgroundCanvas
+                  args={
+                    { ...layer.args, tickColor: color, arcColor: color } as Partial<BackgroundLayer>
+                  }
+                />
+              </BackgroundLayer>
+            );
+          },
+        )}
       </div>
       <div className="gradient-overlay" />
     </div>
