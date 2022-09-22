@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useLayoutEffect, useState } from 'react';
 
 function Home() {
   return (
@@ -12,7 +12,7 @@ function Home() {
         sed lacinia lectus. Duis sit amet sodales felis. Duis nunc eros, mattis at dui ac, convallis
         semper risus. In adipiscing ultrices tellus, in suscipit massa vehicula eu.
       </div>
-      <div>FOOTER</div>
+      <footer>FOOTER</footer>
     </div>
   );
 }

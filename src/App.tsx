@@ -10,7 +10,7 @@ function App() {
   useCustomVH();
   const { isDarkMode } = useContext(AppContext);
   return (
-    <div className={`App ${!isDarkMode ? 'theme-light' : ''}`}>
+    <div id="App" className={`App ${!isDarkMode ? 'theme-light' : ''}`}>
       <Background />
       <div className="gradient-overlay" />
       <SlideShow />

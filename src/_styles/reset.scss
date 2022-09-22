@@ -89,6 +89,7 @@ video {
 }
 html,
 body {
+  overscroll-behavior-y: contain;
   font-family: sans-serif;
 }
 /* HTML5 display-role reset for older browsers */
