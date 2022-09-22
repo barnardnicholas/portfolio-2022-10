@@ -39,10 +39,10 @@ const useTouchEventToScroll = (props = {}) => {
     const dY = clientY - y;
     const adX = Math.abs(dX);
     const adY = Math.abs(dY);
-    if (dX < 0 && adX < 15) onDragLeft();
-    else if (dX > 0 && adX < 15) onDragRight();
-    if (dY < 0 && adY < 15) onDragUp();
-    else if (dY > 0 && adY < 15) onDragDown();
+    if (dX < 0 && adX > 15) onDragLeft();
+    else if (dX > 0 && adX > 15) onDragRight();
+    if (dY < 0 && adY > 15) onDragUp();
+    else if (dY > 0 && adY > 15) onDragDown();
   };
 
   return { handleTouchStart, handleTouchEnd };
