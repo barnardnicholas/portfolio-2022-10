@@ -7,11 +7,11 @@
 .App {
   text-align: center;
   position: fixed;
+  height: 100vh;
   top: 0;
   left: 0;
   right: 0;
-  height: 100vh;
-  height: calc(var(--vh, 1vh) * 100);
+  bottom: 0;
   background-color: var(--main-background);
   color: var(--main-typography);
   @include transitionColors();
@@ -62,6 +62,10 @@ em,
     var(--gradient-overlay-start) 66%,
     var(--gradient-overlay-end) 100%
   );
+}
+
+.text-right {
+  text-align: right;
 }
 
 @import './components/index.scss';

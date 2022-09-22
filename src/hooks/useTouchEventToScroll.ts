@@ -1,9 +1,5 @@
 import { TouchEvent, useState } from 'react';
-
-interface XY {
-  x: number;
-  y: number;
-}
+import { XY } from '../types/generic';
 
 interface UseTouchEventToScrollProps {
   onDragUp: () => void;
@@ -28,11 +24,13 @@ const useTouchEventToScroll = (props = {}) => {
   const [startXY, setStartXY] = useState<XY>({ x: 0, y: 0 });
 
   const handleTouchStart = (e: TouchEvent) => {
+    e.preventDefault();
     const { clientX, clientY } = e.changedTouches[0];
     setStartXY({ x: clientX, y: clientY });
   };
 
   const handleTouchEnd = (e: TouchEvent) => {
+    e.preventDefault();
     const { clientX, clientY } = e.changedTouches[0];
     const { x, y } = startXY;
     const dX = clientX - x;

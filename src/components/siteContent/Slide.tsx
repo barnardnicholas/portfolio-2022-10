@@ -1,8 +1,7 @@
 import React, { ReactNode, useState, useEffect } from 'react';
+import useAppHeightOffset from '../../hooks/useAppHeightOffset';
 import usePrevious from '../../hooks/usePrevious';
 import useWindow from '../../hooks/useWindow';
-import MobileFooterBlocker from './MobileFooterBlocker';
-// import Home from './pages/Home';
 
 interface SlideProps {
   index: number;
@@ -24,6 +23,7 @@ const normalStyles: Record<string, unknown> = {
 function Slide({ index, activeSlide, children }: SlideProps) {
   const { height } = useWindow();
   const prevProps = usePrevious({ activeSlide });
+  const appHeightOffset = useAppHeightOffset();
 
   const [extraStyles, setExtraStyles] = useState<CSSStyleSheet | Record<string, unknown>>({});
 
@@ -39,13 +39,13 @@ function Slide({ index, activeSlide, children }: SlideProps) {
   if (index > activeSlide) translateY = height + 100;
 
   const sectionStyle = {
+    height: `calc(100vh - ${appHeightOffset}px)`,
     transform: `translateY(${translateY}px)`,
     ...extraStyles,
   };
   return (
     <section className="section" style={sectionStyle}>
       {children}
-      <MobileFooterBlocker />
     </section>
   );
 }

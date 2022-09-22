@@ -1,9 +1,9 @@
-import React, { useLayoutEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
-function MobileFooterBlocker() {
+const useAppHeightOffset = () => {
   const [elementHeight, setElementHeight] = useState<number>(0);
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     try {
       const app = document.getElementById('App');
       const { height } = app!.getBoundingClientRect();
@@ -14,8 +14,7 @@ function MobileFooterBlocker() {
     }
   }, []);
 
-  if (elementHeight <= 0) return null;
-  return <div style={{ minHeight: `${elementHeight}px` }} className="mob-foot-blocker" />;
-}
+  return elementHeight;
+};
 
-export default MobileFooterBlocker;
+export default useAppHeightOffset;

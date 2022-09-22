@@ -11,6 +11,10 @@
   line-height: 1em;
   color: var(--main-typography);
   margin-bottom: 1em;
+
+  &.no-margin-bottom {
+    margin-bottom: 0;
+  }
 }
 
 @mixin h1Title() {

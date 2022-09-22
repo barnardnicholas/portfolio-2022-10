@@ -89,9 +89,18 @@ video {
 }
 html,
 body {
-  overscroll-behavior-y: contain;
+  overscroll-behavior: contain;
   font-family: sans-serif;
+
+  -ms-overflow-style: none; /* Hide scrollbar for IE and Edge */
+  scrollbar-width: none; /* Hide scrollbar for Firefox */
 }
+/* Hide scrollbar for Chrome, Safari and Opera */
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+  display: none;
+}
+
 /* HTML5 display-role reset for older browsers */
 article,
 aside,

@@ -4,6 +4,7 @@ import { lerpColor } from '../../utils/utils';
 import { AppContext } from '../context/AppContext';
 import BackgroundCanvas, { BackgroundCanvasArgs } from './BackgroundCanvas';
 import BackgroundLayer from './BackgroundLayer';
+import MasterRotation from './MasterRotation';
 
 interface BackgroundLayer {
   numTicks: number;
@@ -138,26 +139,32 @@ function Background() {
   const maxColor = isDarkMode ? '#f7f7f7' : '#272730';
   return (
     <div className="background-container">
-      <div className="layer-container">
-        {backgroundLayers.map(
-          (layer: { args: Partial<BackgroundLayer>; uid: string }, i: number) => {
-            const color = lerpColor(minColor, maxColor, (1 / backgroundLayers.length) * i);
-            return (
-              <BackgroundLayer
-                key={layer.uid}
-                translateZ={minTranslateZ + i * zSlice}
-                animDelay={i * animDelay}
-              >
-                <BackgroundCanvas
-                  args={
-                    { ...layer.args, tickColor: color, arcColor: color } as Partial<BackgroundLayer>
-                  }
-                />
-              </BackgroundLayer>
-            );
-          },
-        )}
-      </div>
+      <MasterRotation>
+        <div className="layer-container">
+          {backgroundLayers.map(
+            (layer: { args: Partial<BackgroundLayer>; uid: string }, i: number) => {
+              const color = lerpColor(minColor, maxColor, (1 / backgroundLayers.length) * i);
+              return (
+                <BackgroundLayer
+                  key={layer.uid}
+                  translateZ={minTranslateZ + i * zSlice}
+                  animDelay={i * animDelay}
+                >
+                  <BackgroundCanvas
+                    args={
+                      {
+                        ...layer.args,
+                        tickColor: color,
+                        arcColor: color,
+                      } as Partial<BackgroundLayer>
+                    }
+                  />
+                </BackgroundLayer>
+              );
+            },
+          )}
+        </div>
+      </MasterRotation>
     </div>
   );
 }
