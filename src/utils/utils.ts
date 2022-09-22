@@ -85,3 +85,19 @@ export function wrap(value: number, from: number, to: number) {
   }
   return value - cycle * Math.floor((value - intFrom) / cycle);
 }
+
+let throttlePause: boolean;
+/**
+ * Wrap a number around a min/max
+ * @param callback Function to execute
+ * @param time Interval between executions
+ */
+export function throttle(callback: () => void, time: number): void {
+  if (throttlePause) return;
+  throttlePause = true;
+
+  setTimeout(() => {
+    callback();
+    throttlePause = false;
+  }, time);
+}
