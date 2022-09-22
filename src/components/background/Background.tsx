@@ -158,7 +158,6 @@ function Background() {
           },
         )}
       </div>
-      <div className="gradient-overlay" />
     </div>
   );
 }

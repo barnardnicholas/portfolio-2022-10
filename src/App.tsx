@@ -10,6 +10,7 @@ function App() {
   return (
     <div className={`App ${!isDarkMode ? 'theme-light' : ''}`}>
       <Background />
+      <div className="gradient-overlay" />
       {/* <h1>BACKGROUND TESTS</h1>
       <button className="button" type="button" onClick={toggleDarkMode}>
         Dark Mode

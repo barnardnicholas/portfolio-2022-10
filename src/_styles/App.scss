@@ -53,4 +53,18 @@ em,
   @include transitionColors();
 }
 
+.gradient-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(
+    circle,
+    var(--gradient-overlay-start) 0%,
+    var(--gradient-overlay-start) 66%,
+    var(--gradient-overlay-end) 100%
+  );
+}
+
 @import './components/index.scss';
