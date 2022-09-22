@@ -3,7 +3,7 @@ export function clamp(value: number, min: number, max: number): number {
     if (value < min) return min;
     return value > max ? max : value;
   }
-  if (value < max) {
+  if (value > max) {
     return max;
   }
   return value > min ? min : value;
