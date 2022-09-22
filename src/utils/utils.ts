@@ -94,10 +94,10 @@ let throttlePause: boolean;
  */
 export function throttle(callback: () => void, time: number): void {
   if (throttlePause) return;
+  callback();
   throttlePause = true;
 
   setTimeout(() => {
-    callback();
     throttlePause = false;
   }, time);
 }

@@ -1,8 +1,9 @@
 import React, { ReactNode, WheelEvent, KeyboardEvent, useContext } from 'react';
 import useTouchEventToScroll from '../../hooks/useTouchEventToScroll';
 import useWindow from '../../hooks/useWindow';
-import { clamp } from '../../utils/utils';
+import { clamp, throttle } from '../../utils/utils';
 import { SlideshowContext } from '../context/SlideshowContext';
+import Home from './pages/Home';
 
 interface SlideProps {
   index: number;
@@ -28,8 +29,10 @@ const slidesLength = 4;
 function SlideShow() {
   const { activeSlide, setActiveSlide } = useContext(SlideshowContext);
 
-  const nextSlide = () => setActiveSlide(clamp(activeSlide + 1, 0, slidesLength - 1));
-  const prevSlide = () => setActiveSlide(clamp(activeSlide - 1, 0, slidesLength - 1));
+  const nextSlide = () =>
+    throttle(() => setActiveSlide(clamp(activeSlide + 1, 0, slidesLength - 1)), 750);
+  const prevSlide = () =>
+    throttle(() => setActiveSlide(clamp(activeSlide - 1, 0, slidesLength - 1)), 750);
 
   const { handleTouchStart, handleTouchEnd } = useTouchEventToScroll({
     onDragUp: nextSlide,
@@ -60,13 +63,7 @@ function SlideShow() {
       className="content-slideshow"
     >
       <Slide index={0} activeSlide={activeSlide}>
-        <h1>Page 1</h1>
-        <button className="button" type="button" onClick={nextSlide}>
-          Next
-        </button>
-        <button className="button" type="button" onClick={() => setActiveSlide(2)}>
-          Go to slide 3
-        </button>
+        <Home />
       </Slide>
       <Slide index={1} activeSlide={activeSlide}>
         <h1>Page 2</h1>
