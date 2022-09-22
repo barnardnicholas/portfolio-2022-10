@@ -45,13 +45,6 @@ function SlideShow() {
     >
       <Slide index={0} activeSlide={activeSlide}>
         <Home />
-        {/* <h1>Page 1</h1>
-        <button className="button" type="button" onClick={prevSlide}>
-          Prev
-        </button>
-        <button className="button" type="button" onClick={nextSlide}>
-          Next
-        </button> */}
       </Slide>
       <Slide index={1} activeSlide={activeSlide}>
         <div className="slide-content">
@@ -62,6 +55,9 @@ function SlideShow() {
           <button className="button" type="button" onClick={nextSlide}>
             Next
           </button>
+          <footer>
+            <h3 className="text-right no-margin-bottom">FOOTER</h3>
+          </footer>
         </div>
       </Slide>
       <Slide index={2} activeSlide={activeSlide}>
@@ -73,6 +69,9 @@ function SlideShow() {
           <button className="button" type="button" onClick={nextSlide}>
             Next
           </button>
+          <footer>
+            <h3 className="text-right no-margin-bottom">FOOTER</h3>
+          </footer>
         </div>
       </Slide>
       <Slide index={3} activeSlide={activeSlide}>
@@ -84,6 +83,9 @@ function SlideShow() {
           <button className="button" type="button" onClick={nextSlide}>
             Next
           </button>
+          <footer>
+            <h3 className="text-right no-margin-bottom">FOOTER</h3>
+          </footer>
         </div>
       </Slide>
     </main>

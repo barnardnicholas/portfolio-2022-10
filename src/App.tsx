@@ -6,6 +6,7 @@ import SlideShow from './components/siteContent/SiteContent';
 import SlideshowContextProvider from './components/context/SlideshowContext';
 import useCustomVH from './hooks/useCustomVH';
 import useAppHeightOffset from './hooks/useAppHeightOffset';
+import DarkModeButton from './components/ui/DarkModeButton';
 
 function App() {
   useCustomVH();
@@ -22,6 +23,7 @@ function App() {
       <Background />
       <div className="gradient-overlay" />
       <SlideShow />
+      <DarkModeButton />
     </div>
   );
 }
