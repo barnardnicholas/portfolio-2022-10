@@ -64,6 +64,9 @@ function SlideShow() {
         <button className="button" type="button" onClick={nextSlide}>
           Next
         </button>
+        <button className="button" type="button" onClick={() => setActiveSlide(2)}>
+          Go to slide 3
+        </button>
       </Slide>
       <Slide index={1} activeSlide={activeSlide}>
         <h1>Page 2</h1>

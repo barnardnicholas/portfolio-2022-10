@@ -8,18 +8,22 @@ interface XY {
 interface UseTouchEventToScrollProps {
   onDragUp: () => void;
   onDragDown: () => void;
+  onDragLeft: () => void;
+  onDragRight: () => void;
 }
 
 /* eslint-disable */
 const initialProps: UseTouchEventToScrollProps = {
   onDragUp: () => {},
   onDragDown: () => {},
+  onDragLeft: () => {},
+  onDragRight: () => {},
 };
 /* eslint-enable */
 
 const useTouchEventToScroll = (props = {}) => {
   const compedProps: UseTouchEventToScrollProps = { ...initialProps, ...props };
-  const { onDragUp, onDragDown } = compedProps;
+  const { onDragUp, onDragDown, onDragLeft, onDragRight } = compedProps;
 
   const [startXY, setStartXY] = useState<XY>({ x: 0, y: 0 });
 
@@ -29,12 +33,16 @@ const useTouchEventToScroll = (props = {}) => {
   };
 
   const handleTouchEnd = (e: TouchEvent) => {
-    const { clientY } = e.changedTouches[0];
-    const { y } = startXY;
+    const { clientX, clientY } = e.changedTouches[0];
+    const { x, y } = startXY;
+    const dX = clientX - x;
     const dY = clientY - y;
-    if (Math.abs(dY) < 15) return;
-    if (dY < 0) onDragUp();
-    else if (dY > 0) onDragDown();
+    const adX = Math.abs(dX);
+    const adY = Math.abs(dY);
+    if (dX < 0 && adX < 15) onDragLeft();
+    else if (dX > 0 && adX < 15) onDragRight();
+    if (dY < 0 && adY < 15) onDragUp();
+    else if (dY > 0 && adY < 15) onDragDown();
   };
 
   return { handleTouchStart, handleTouchEnd };
