@@ -40,7 +40,7 @@ function Slide({ index, activeSlide, children }: SlideProps) {
 
   const sectionStyle = {
     height: `calc(100vh - ${appHeightOffset}px)`,
-    transform: `translateY(${translateY}px)`,
+    top: `${translateY}px`,
     ...extraStyles,
   };
   return (
