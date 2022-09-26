@@ -46,8 +46,6 @@ function Slide({ index, activeSlide, children }: SlideProps) {
   if (index < activeSlide) translateY = -height - 100;
   if (index > activeSlide) translateY = height + 100;
 
-  console.log(translateY);
-
   const sectionStyle = {
     height: `calc(100vh - ${appHeightOffset}px)`,
     top: `${translateY}px`,
