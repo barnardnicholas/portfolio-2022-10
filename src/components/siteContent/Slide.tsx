@@ -1,7 +1,6 @@
 import React, { ReactNode, useState, useEffect } from 'react';
 import useAppHeightOffset from '../../hooks/useAppHeightOffset';
 import usePrevious from '../../hooks/usePrevious';
-import useWindow from '../../hooks/useWindow';
 
 interface SlideProps {
   index: number;
@@ -21,7 +20,7 @@ const normalStyles: Record<string, unknown> = {
 };
 
 function Slide({ index, activeSlide, children }: SlideProps) {
-  const { height } = useWindow();
+  const [height, setHeight] = useState<number>(window.innerHeight);
   const prevProps = usePrevious({ activeSlide });
   const appHeightOffset = useAppHeightOffset();
 
@@ -34,9 +33,20 @@ function Slide({ index, activeSlide, children }: SlideProps) {
     }
   }, [activeSlide, index, prevProps.activeSlide]);
 
+  useEffect(() => {
+    const update = () => {
+      setHeight(window.innerHeight);
+    };
+    window.addEventListener('resize', update);
+    update();
+    return () => window.removeEventListener('resize', update);
+  }, []);
+
   let translateY = 0;
   if (index < activeSlide) translateY = -height - 100;
   if (index > activeSlide) translateY = height + 100;
+
+  console.log(translateY);
 
   const sectionStyle = {
     height: `calc(100vh - ${appHeightOffset}px)`,

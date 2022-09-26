@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useRef, useMemo, useState, useEffect } from 'react';
 
 interface UseWindow {
   width: number;
@@ -13,20 +13,21 @@ interface UseWindow {
  */
 function useWindow(): UseWindow {
   const windowRef = useRef<Window & typeof globalThis>(window);
+  const [windowState, setWindowState] = useState<Window & typeof globalThis>(window);
 
   useEffect(() => {
     function update() {
-      windowRef.current = window;
+      setWindowState(window);
     }
 
     window.addEventListener('resize', update);
-
+    update();
     return () => {
       window.removeEventListener('resize', update);
     };
-  });
+  }, []);
 
-  const { innerWidth, innerHeight } = windowRef.current;
+  const { innerWidth, innerHeight } = windowState;
   const vMin = innerWidth < innerHeight ? innerWidth : innerHeight;
   const vMax = innerWidth >= innerHeight ? innerWidth : innerHeight;
 

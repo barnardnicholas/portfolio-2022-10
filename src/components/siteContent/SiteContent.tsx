@@ -1,6 +1,6 @@
-import React, { WheelEvent, KeyboardEvent, useContext } from 'react';
+import React, { WheelEvent, KeyboardEvent, useContext, useRef } from 'react';
 import useTouchEventToScroll from '../../hooks/useTouchEventToScroll';
-import { clamp, throttle } from '../../utils/utils';
+import { clamp } from '../../utils/utils';
 import { SlideshowContext } from '../context/SlideshowContext';
 import Slide from './Slide';
 import Home from './pages/Home';
@@ -9,11 +9,26 @@ const slidesLength = 4;
 
 function SlideShow() {
   const { activeSlide, setActiveSlide } = useContext(SlideshowContext);
+  const canScroll = useRef<boolean>(true);
 
-  const nextSlide = () =>
-    throttle(() => setActiveSlide(clamp(activeSlide + 1, 0, slidesLength - 1)), 750);
-  const prevSlide = () =>
-    throttle(() => setActiveSlide(clamp(activeSlide - 1, 0, slidesLength - 1)), 750);
+  const nextSlide = () => {
+    if (canScroll.current) {
+      setActiveSlide(clamp(activeSlide + 1, 0, slidesLength - 1));
+      canScroll.current = false;
+      setTimeout(() => {
+        canScroll.current = true;
+      }, 1000);
+    }
+  };
+  const prevSlide = () => {
+    if (canScroll.current) {
+      setActiveSlide(clamp(activeSlide - 1, 0, slidesLength - 1));
+      canScroll.current = false;
+      setTimeout(() => {
+        canScroll.current = true;
+      }, 1000);
+    }
+  };
 
   const { handleTouchStart, handleTouchEnd } = useTouchEventToScroll({
     onDragUp: nextSlide,
@@ -22,8 +37,8 @@ function SlideShow() {
 
   const handleWheel = (e: WheelEvent) => {
     const { deltaY } = e; // + = down, - = up
-    if (deltaY < 0) prevSlide();
-    if (deltaY > 0) nextSlide();
+    if (deltaY < 0 && canScroll.current) prevSlide();
+    if (deltaY > 0 && canScroll.current) nextSlide();
   };
 
   const handleKeyDown = (e: KeyboardEvent) => {
