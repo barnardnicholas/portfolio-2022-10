@@ -6,14 +6,15 @@
 
 .App {
   text-align: center;
-  position: fixed;
-  height: 100vh;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
+  // position: fixed;
+  // height: 100vh;
+  // top: 0;
+  // left: 0;
+  // right: 0;
+  // bottom: 0;
   background-color: var(--main-background);
   color: var(--main-typography);
+  
 
   @include transitionColors();
   @include bodyText();
@@ -52,7 +53,7 @@ em,
 }
 
 .gradient-overlay {
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   right: 0;
@@ -63,6 +64,7 @@ em,
     var(--gradient-overlay-start) 66%,
     var(--gradient-overlay-end) 100%
   );
+  pointer-events: none;
 }
 
 .text-right {

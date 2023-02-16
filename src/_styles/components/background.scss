@@ -7,14 +7,14 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: -1;
+  // z-index: -1;
   perspective: 800px;
   overflow: hidden;
 
   .master-rotation {
     transform-style: preserve-3d;
     transform: rotateX(0deg) rotateY(0deg);
-    transition: transform 0.5s ease;
+    transition: transform 0.1s ease;
   }
 
   .layer-container {

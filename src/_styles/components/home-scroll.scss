@@ -1,0 +1,9 @@
+.home-scroll {
+    padding: 1rem;
+    min-height: 900vh;
+    display: flex;
+    flex-direction:column;
+    justify-content: space-between;
+    position: relative;
+    z-index: 1;
+}
